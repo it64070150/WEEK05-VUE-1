@@ -44,6 +44,9 @@
 
             <!-- ข้อ 1 ----------------------------------------------------------------- -->
             <div id="ex1" class="my-4">
+                {{ student_id }}
+                {{ student_fname }}
+                {{ student_lname }}
                 <!-- ใส่โค้ดแสดงค่าของตัวแปรใน div นี้ -->
             </div>
             <hr>
@@ -64,12 +67,12 @@
 
             <!-- ข้อ 2 ----------------------------------------------------------------- -->
             <div id='ex2'>
-                <img src="./image/0.svg">
-                <img src="./image/1.svg">
-                <img src="./image/2.svg">
-                <img src="./image/3.svg">
-                <img src="./image/4.svg">
-                <img src="./image/5.svg">
+                <img v-show="number_runner == 0" src="./image/0.svg">
+                <img v-show="number_runner == 1"src="./image/1.svg">
+                <img v-show="number_runner == 2"src="./image/2.svg">
+                <img v-show="number_runner == 3"src="./image/3.svg">
+                <img v-show="number_runner == 4"src="./image/4.svg">
+                <img v-show="number_runner == 5"src="./image/5.svg">
             </div>
 
             <hr>
@@ -88,9 +91,9 @@
 
             <!-- ข้อ 3 ----------------------------------------------------------------- -->
             <div id='ex3'>
-                <a class="button is-danger">Odd Number</a>
-                <a class="button is-success">Even Number</a>
-                <a class="button is-info">Zero Number</a>
+                <a v-if="number_runner %2 === 1" class="button is-danger">Odd Number </a>
+                <a v-if="number_runner %2 === 0"class="button is-success">Even Number</a>
+                <a v-if="number_runner == 0"class="button is-info">Zero Number</a>
             </div>
 
             <hr>
@@ -103,7 +106,8 @@
             </p>
 
             <!-- ข้อ 4 ----------------------------------------------------------------- -->
-            <div id='ex4'>
+            <div id='ex4' v-for="item in months">
+                <ul><li>{{ item }}</li> </ul>
             </div>
 
             <hr>
@@ -120,9 +124,9 @@
 
             <!-- ข้อ 5 ----------------------------------------------------------------- -->
             <div id='ex5'>
-                <a class=button>-</a>
+                <a class=button @click="counter--">-</a>
                 <a class="is-size-4 mx-5">{{counter}}</a>
-                <a class=button>+</a>
+                <a class=button  @click="counter++">+</a>
             </div>
 
             <hr>
@@ -142,7 +146,7 @@
             <div id='ex6'>
                 <div class="dropdown is-active">
                     <div class="dropdown-trigger">
-                        <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
+                        <button class="button" aria-haspopup="true" aria-controls="dropdown-menu" @click="popup = !popup">
                             <span>Month Selection</span>
                             <span class="icon is-small">
                                 <i class="fas fa-angle-down" aria-hidden="true"></i>
@@ -150,9 +154,10 @@
                         </button>
                     </div>
                     <div class="dropdown-menu" id="dropdown-menu" role="menu">
-                        <div class="dropdown-content">
-                            <a class="dropdown-item">
-                                January
+                        <div class="dropdown-content" v-show="popup">
+                            <a class="dropdown-item" v-for="item in months">
+                                <div>{{ item }}</div>
+                                
                             </a>
                         </div>
                     </div>
@@ -174,7 +179,8 @@
             </p>
 
             <!-- ข้อ 7 ----------------------------------------------------------------- -->
-            <div id="ex7">
+            <div id="ex7" v-for="day in week" :key="day.title" :style="{color : day.color}">
+                <ul><li>{{ day.title }}</li> </ul>
             </div>
 
         </div>
